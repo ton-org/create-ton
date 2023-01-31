@@ -3,6 +3,7 @@ import fs from 'fs-extra';
 import path from 'path';
 import { execSync } from 'child_process';
 import inquirer from 'inquirer';
+import chalk from 'chalk';
 
 const PACKAGE_JSON = 'package.json';
 
@@ -74,22 +75,34 @@ build`
 
     console.log('\nInitialized git repository.\n');
 
-    console.log(`Success!
-Now you can run the following to run the default tests:
-cd ${name}
-npm run test
-
-You can also run the following commands in your project's directory:
-
-npx blueprint create MyContract
-creates all the necessary files for a new contract
-
-npx blueprint build
-asks you to choose a contract and builds it
-
-npx blueprint run
-asks you to choose a script and runs it
-`);
+    console.log(`Success!`);
+    console.log(chalk.blueBright(`
+     ____  _    _   _ _____ ____  ____  ___ _   _ _____ 
+    | __ )| |  | | | | ____|  _ \\|  _ \\|_ _| \\ | |_   _|
+    |  _ \\| |  | | | |  _| | |_) | |_) || ||  \\| | | |  
+    | |_) | |__| |_| | |___|  __/|  _ < | || |\\  | | |  
+    |____/|_____\\___/|_____|_|   |_| \\_\\___|_| \\_| |_|  `));
+    console.log(chalk.blue(`                     TON development for professionals`));
+    console.log(``);
+    console.log(`Your new project is ready, available commands:`);
+    console.log(``);
+    console.log(chalk.greenBright(` >  `) + chalk.cyanBright(`cd ${name}`));
+    console.log(` change directory to your new project`);
+    console.log(``);
+    console.log(chalk.greenBright(` >  `) + chalk.cyanBright(`npm run test`));
+    console.log(` run the default project test suite`);
+    console.log(``);
+    console.log(chalk.greenBright(` >  `) + chalk.cyanBright(`npx blueprint build`));
+    console.log(` choose a smart contract and build it`);
+    console.log(``);
+    console.log(chalk.greenBright(` >  `) + chalk.cyanBright(`npx blueprint run`));
+    console.log(` choose a script and run it (eg. a deploy script)`);
+    console.log(``);
+    console.log(chalk.greenBright(` >  `) + chalk.cyanBright(`npx blueprint create MyNewContract`));
+    console.log(` create all the necessary files for a new contract`);
+    console.log(``);
+    console.log(`For help and docs visit https://github.com/ton-community/blueprint`);
+    console.log(``);
 }
 
 main().catch(console.error);
