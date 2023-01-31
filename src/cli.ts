@@ -1,22 +1,10 @@
 #!/usr/bin/env node
-import fs from "fs-extra";
-import path from "path";
-import { execSync } from "child_process";
-import readline from "readline";
-import inquirer from "inquirer";
+import fs from 'fs-extra';
+import path from 'path';
+import { execSync } from 'child_process';
+import inquirer from 'inquirer';
 
-const PACKAGE_JSON = 'package.json'
-
-function question(q: string): Promise<string> {
-    const iface = readline.createInterface(process.stdin, process.stdout)
-
-    return new Promise((resolve) => {
-        iface.question(q, (ans) => {
-            iface.close()
-            resolve(ans)
-        })
-    })
-}
+const PACKAGE_JSON = 'package.json';
 
 async function main() {
     const { name, variant } = await inquirer.prompt([
@@ -37,44 +25,54 @@ async function main() {
                     name: 'A simple counter contract',
                     value: 'counter',
                 },
-            ]
-        }
-    ])
+            ],
+        },
+    ]);
 
-    if (name.length === 0) throw new Error('Cannot initialize a project with an empty name')
+    if (name.length === 0) throw new Error('Cannot initialize a project with an empty name');
 
-    await fs.mkdir(name)
+    await fs.mkdir(name);
 
-    const steps = 2
+    const steps = 2;
 
-    console.log(`[1/${steps}] Copying files...`)
+    console.log(`[1/${steps}] Copying files...`);
 
-    const basePath = path.join(__dirname, 'template')
+    const basePath = path.join(__dirname, 'template');
     for (const file of await fs.readdir(basePath)) {
-        if (file === PACKAGE_JSON || file === 'variants') continue
-        await fs.copy(path.join(basePath, file), path.join(name, file))
+        if (file === PACKAGE_JSON || file === 'variants') continue;
+        await fs.copy(path.join(basePath, file), path.join(name, file));
     }
 
-    const variantPath = path.join(basePath, 'variants', variant)
+    const variantPath = path.join(basePath, 'variants', variant);
     for (const file of await fs.readdir(variantPath)) {
-        await fs.copy(path.join(variantPath, file), path.join(name, file))
+        await fs.copy(path.join(variantPath, file), path.join(name, file));
     }
 
-    await fs.writeFile(path.join(name, PACKAGE_JSON), (await fs.readFile(path.join(basePath, PACKAGE_JSON))).toString().replace('{{name}}', name))
+    await fs.writeFile(
+        path.join(name, '.gitignore'),
+        `node_modules
+temp
+build`
+    );
 
-    console.log(`[2/${steps}] Installing dependencies...`)
+    await fs.writeFile(
+        path.join(name, PACKAGE_JSON),
+        (await fs.readFile(path.join(basePath, PACKAGE_JSON))).toString().replace('{{name}}', name)
+    );
+
+    console.log(`[2/${steps}] Installing dependencies...`);
 
     execSync('npm i', {
         stdio: 'inherit',
         cwd: name,
-    })
+    });
 
     execSync('git init', {
         stdio: 'inherit',
         cwd: name,
-    })
+    });
 
-    console.log('\nInitialized git repository.\n')
+    console.log('\nInitialized git repository.\n');
 
     console.log(`Success!
 Now you can run the following to run the default tests:
@@ -91,7 +89,7 @@ asks you to choose a contract and builds it
 
 npx blueprint run
 asks you to choose a script and runs it
-`)
+`);
 }
 
-main().catch(console.error)
+main().catch(console.error);

@@ -1,30 +1,31 @@
 {
-  "name": "create-ton-project",
-  "version": "0.0.2",
-  "license": "MIT",
-  "description": "Tool to quickly create TON projects",
-  "author": "TonTech",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/ton-community/create-ton-project.git"
-  },
-  "files": [
-    "dist/**/*"
-  ],
-  "bin": {
-    "create-ton-project": "./dist/cli.js"
-  },
-  "scripts": {
-    "build": "rm -rf dist && tsc && cp -r template dist/template"
-  },
-  "devDependencies": {
-    "@types/fs-extra": "^11.0.1",
-    "@types/node": "^18.11.18",
-    "typescript": "^4.9.5",
-    "@types/inquirer": "^8.0.0"
-  },
-  "dependencies": {
-    "fs-extra": "^11.1.0",
-    "inquirer": "^8.0.0"
-  }
+    "name": "create-ton-project",
+    "version": "0.0.2",
+    "license": "MIT",
+    "description": "Tool to quickly create TON projects",
+    "author": "TonTech",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/ton-community/create-ton-project.git"
+    },
+    "files": [
+        "dist/**/*"
+    ],
+    "bin": {
+        "create-ton-project": "./dist/cli.js"
+    },
+    "scripts": {
+        "build": "rm -rf dist && tsc && cp -r template dist/template"
+    },
+    "devDependencies": {
+        "@types/fs-extra": "^11.0.1",
+        "@types/inquirer": "^8.0.0",
+        "@types/node": "^18.11.18",
+        "prettier": "^2.8.3",
+        "typescript": "^4.9.5"
+    },
+    "dependencies": {
+        "fs-extra": "^11.1.0",
+        "inquirer": "^8.0.0"
+    }
 }

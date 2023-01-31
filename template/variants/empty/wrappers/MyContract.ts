@@ -1,28 +1,28 @@
 import { Address, beginCell, Cell, Contract, contractAddress, ContractProvider, Sender, SendMode } from "ton-core";
 
-export type ContractConfig = {
+export type MyContractConfig = {
 
 }
 
-export function contractConfigToCell(config: ContractConfig): Cell {
+export function myContractConfigToCell(config: MyContractConfig): Cell {
     return beginCell()
         .endCell()
 }
 
-export class Contract implements Contract {
+export class MyContract implements Contract {
     constructor(
         readonly address: Address,
         readonly init?: { code: Cell, data: Cell },
     ) {}
 
     static createFromAddress(address: Address) {
-        return new Contract(address)
+        return new MyContract(address)
     }
 
-    static createFromConfig(config: ContractConfig, code: Cell, workchain = 0) {
-        const data = contractConfigToCell(config)
+    static createFromConfig(config: MyContractConfig, code: Cell, workchain = 0) {
+        const data = myContractConfigToCell(config)
         const init = { code, data }
-        return new Contract(contractAddress(workchain, init), init)
+        return new MyContract(contractAddress(workchain, init), init)
     }
 
     async sendDeploy(provider: ContractProvider, via: Sender, value: bigint) {
