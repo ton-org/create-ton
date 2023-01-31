@@ -1,4 +1,4 @@
-#include "imports/stdlib.fc"; ;; import the stdlib to have access to all standard functions
+#include "imports/stdlib.fc";
 
 const op::increase = "op::increase"c; ;; create an opcode from string using the "c" prefix, this results in 0x7e8764ef opcode in this case
 
