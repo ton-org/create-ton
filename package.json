@@ -1,6 +1,6 @@
 {
     "name": "create-ton",
-    "version": "0.0.6",
+    "version": "0.0.7",
     "license": "MIT",
     "description": "Tool to quickly create TON projects",
     "author": "TonTech",
@@ -19,7 +19,7 @@
     },
     "devDependencies": {
         "@types/fs-extra": "^11.0.1",
-        "@types/inquirer": "^8.0.0",
+        "@types/inquirer": "^8.2.5",
         "@types/node": "^18.11.18",
         "prettier": "^2.8.3",
         "typescript": "^4.9.5"
@@ -27,6 +27,6 @@
     "dependencies": {
         "chalk": "^4.1.0",
         "fs-extra": "^11.1.0",
-        "inquirer": "^8.0.0"
+        "inquirer": "^8.2.5"
     }
 }
