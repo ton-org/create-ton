@@ -100,13 +100,14 @@ build`
     console.log(`Your new project is ready, available commands:`);
     console.log(``);
     console.log(chalk.greenBright(` >  `) + chalk.cyanBright(`cd ${name}`));
-    console.log(` change directory to your new project`);
-    console.log(``);
-    console.log(chalk.greenBright(` >  `) + chalk.cyanBright(`npm run test`));
-    console.log(` run the default project test suite`);
+    console.log(chalk.greenBright(` >  `) + chalk.cyanBright(`npm install`));    
+    console.log(` change directory to your new project and install it`);
     console.log(``);
     console.log(chalk.greenBright(` >  `) + chalk.cyanBright(`npx blueprint build`));
     console.log(` choose a smart contract and build it`);
+    console.log(``);
+    console.log(chalk.greenBright(` >  `) + chalk.cyanBright(`npm run test`));
+    console.log(` run the default project test suite`);
     console.log(``);
     console.log(chalk.greenBright(` >  `) + chalk.cyanBright(`npx blueprint run`));
     console.log(` choose a script and run it (eg. a deploy script)`);
