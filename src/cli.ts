@@ -26,7 +26,7 @@ async function main() {
 
     if (contractName.length === 0) throw new Error(`Cannot create a contract with an empty name`);
 
-    if (contractName.toLowerCase() === 'contract' || !/^[a-zA-Z0-9]+$/.test(contractName))
+    if (contractName.toLowerCase() === 'contract' || !/^[A-Z][a-zA-Z0-9]*$/.test(contractName))
         throw new Error(`Cannot create a contract with the name '${contractName}'`);
 
     const { variant }: { variant: string } = await inquirer.prompt([
