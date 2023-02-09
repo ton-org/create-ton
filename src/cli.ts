@@ -20,7 +20,7 @@ async function main() {
     const contractName: string = (
         await inquirer.prompt({
             name: 'contractName',
-            message: 'First created contract name',
+            message: 'First created contract name (PascalCase)',
         })
     ).contractName.trim();
 
@@ -100,8 +100,7 @@ build`
     console.log(`Your new project is ready, available commands:`);
     console.log(``);
     console.log(chalk.greenBright(` >  `) + chalk.cyanBright(`cd ${name}`));
-    console.log(chalk.greenBright(` >  `) + chalk.cyanBright(`npm install`));    
-    console.log(` change directory to your new project and install it`);
+    console.log(` change directory to your new project`);
     console.log(``);
     console.log(chalk.greenBright(` >  `) + chalk.cyanBright(`npx blueprint build`));
     console.log(` choose a smart contract and build it`);
@@ -112,8 +111,8 @@ build`
     console.log(chalk.greenBright(` >  `) + chalk.cyanBright(`npx blueprint run`));
     console.log(` choose a script and run it (eg. a deploy script)`);
     console.log(``);
-    console.log(chalk.greenBright(` >  `) + chalk.cyanBright(`npx blueprint create MyNewContract`));
-    console.log(` create all the necessary files for a new contract`);
+    console.log(chalk.greenBright(` >  `) + chalk.cyanBright(`npx blueprint create AnotherContract`));
+    console.log(` create all the necessary files for another new contract`);
     console.log(``);
     console.log(`For help and docs visit https://github.com/ton-community/blueprint`);
     console.log(``);
