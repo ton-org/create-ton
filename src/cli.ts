@@ -105,7 +105,7 @@ build`
     console.log(chalk.greenBright(` >  `) + chalk.cyanBright(`npx blueprint build`));
     console.log(` choose a smart contract and build it`);
     console.log(``);
-    console.log(chalk.greenBright(` >  `) + chalk.cyanBright(`npm run test`));
+    console.log(chalk.greenBright(` >  `) + chalk.cyanBright(`npx blueprint test`));
     console.log(` run the default project test suite`);
     console.log(``);
     console.log(chalk.greenBright(` >  `) + chalk.cyanBright(`npx blueprint run`));
