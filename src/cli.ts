@@ -84,7 +84,11 @@ build`
 
     execSync(`npx blueprint create ${contractName} --type ${variant}`, execOpts);
 
-    execSync('git init', execOpts);
+    try {
+        execSync('git init', execOpts);
+    } catch (e) {
+        console.error('Failed to initialize git repository:', (e as any).toString());
+    }
 
     console.log(`Success!`);
     console.log(
