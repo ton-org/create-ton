@@ -36,12 +36,20 @@ async function main() {
             type: 'list',
             choices: [
                 {
-                    name: 'An empty contract',
-                    value: 'empty',
+                    name: 'An empty contract (FunC)',
+                    value: 'func-empty',
                 },
                 {
-                    name: 'A simple counter contract',
-                    value: 'counter',
+                    name: 'A simple counter contract (FunC)',
+                    value: 'func-counter',
+                },
+                {
+                    name: 'An empty contract (TACT)',
+                    value: 'tact-empty',
+                },
+                {
+                    name: 'A simple counter contract (TACT)',
+                    value: 'tact-counter',
                 },
             ],
         },
@@ -63,7 +71,8 @@ async function main() {
         path.join(name, '.gitignore'),
         `node_modules
 temp
-build`
+build
+`
     );
 
     await fs.writeFile(

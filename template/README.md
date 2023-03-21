@@ -1,8 +1,6 @@
-# TON project template (RFC)
+# TON project
 
 Starter template for a new TON project - FunC contracts, unit tests, compilation and deployment scripts.
-
-> This repo is a work in progress and is subject to change
 
 ## Layout
 
@@ -11,18 +9,13 @@ Starter template for a new TON project - FunC contracts, unit tests, compilation
 -   `tests` - tests for the contracts. Would typically use the wrappers.
 -   `scripts` - contains scripts used by the project, mainly the deployment scripts.   
 
-We ask the community to provide any comments on this layout, the wanted/required changes, or even suggestions for entirely different project structures and/or tool concepts.
-
-PRs are welcome!
-
 ## Repo contents / tech stack
 1. Compiling FunC - [https://github.com/ton-community/func-js](https://github.com/ton-community/func-js)
-2. Testing TON smart contracts - [https://github.com/ton-community/sandbox/](https://github.com/ton-community/sandbox/)
-3. Deployment of contracts is supported with [TON Connect 2](https://github.com/ton-connect/), [Tonhub wallet](https://tonhub.com/) or via a direct `ton://` deeplink
+2. Testing TON smart contracts - [https://github.com/ton-community/sandbox](https://github.com/ton-community/sandbox)
+3. Deployment of contracts is supported with [TON Connect 2](https://github.com/ton-connect/), [Tonhub wallet](https://tonhub.com/), using mnemonics, or via a direct `ton://` deeplink
 
 ## How to use
-* Clone this repo
-* Run `yarn install`
+* Run `npm create ton@latest`
 
 ### Building a contract
 1. Interactively
@@ -41,6 +34,7 @@ PRs are welcome!
       1. With a TON Connect compatible wallet
       2. A `ton://` deep link / QR code
       3. Tonhub wallet
+      4. Mnemonic
    5. Deploy the contract
 2. Non-interactively
    1. Run `yarn blueprint run <CONTRACT> --<NETWORK> --<DEPLOY_METHOD>`

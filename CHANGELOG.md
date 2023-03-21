@@ -5,6 +5,24 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.1.0] - 2023-03-21
+
+### Added
+
+- Added support for [TACT](https://github.com/tact-lang/tact), including TACT smart contract templates
+- Added `.prettierignore` to template to ignore generated TACT files
+
+### Changed
+
+- Updated template dependencies, including blueprint to 0.6.0, sandbox to 0.6.1, test-utils to 0.2.0
+- Edited template's `README.md`
+- Changed template's `.gitignore` to contain a newline at the end
+- Updated dependencies
+
+### Removed
+
+- Removed dubious `LICENSE` file from template
+
 ## [0.0.11] - 2023-03-02
 
 ### Changed
