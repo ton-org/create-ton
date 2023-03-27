@@ -8,12 +8,17 @@ import chalk from 'chalk';
 const PACKAGE_JSON = 'package.json';
 
 async function main() {
-    const name: string = (
-        await inquirer.prompt({
-            name: 'name',
-            message: 'Project name',
-        })
-    ).name.trim();
+    console.log();
+
+    const name: string =
+        process.argv.length > 2
+            ? process.argv[2]
+            : (
+                  await inquirer.prompt({
+                      name: 'name',
+                      message: 'Project name',
+                  })
+              ).name.trim();
 
     if (name.length === 0) throw new Error('Cannot initialize a project with an empty name');
 
@@ -87,11 +92,32 @@ build
         cwd: name,
     };
 
-    execSync('npm i', execOpts);
+    const pkgManager = (process.env.npm_config_user_agent ?? 'npm/').split(' ')[0].split('/')[0];
+
+    switch (pkgManager) {
+        case 'yarn':
+            execSync('yarn', execOpts);
+            break;
+        case 'pnpm':
+            execSync('pnpm install', execOpts);
+            break;
+        default:
+            execSync('npm install', execOpts);
+            break;
+    }
 
     console.log(`\n[3/${steps}] Creating your first contract...`);
 
-    execSync(`npx blueprint create ${contractName} --type ${variant}`, execOpts);
+    let execCommand = 'npm';
+    switch (pkgManager) {
+        case 'yarn':
+            execCommand = 'yarn';
+            break;
+        case 'pnpm':
+            execCommand = 'pnpm';
+            break;
+    }
+    execSync(`${execCommand} exec blueprint -- create ${contractName} --type ${variant}`, execOpts);
 
     try {
         execSync('git init', execOpts);

@@ -5,6 +5,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.0] - 2023-03-27
+
+### Added
+
+- Added the ability to pass project name as a command line argument
+
+### Changed
+
+- Dependencies of newly created projects are now installed using the package manager that is used to invoke create-ton
+- Updated template dependencies' versions: blueprint to 0.6.1, sandbox to 0.7.0
+
 ## [0.1.0] - 2023-03-21
 
 ### Added
