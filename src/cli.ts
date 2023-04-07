@@ -117,7 +117,7 @@ build
             execCommand = 'pnpm';
             break;
     }
-    execSync(`${execCommand} exec blueprint -- create ${contractName} --type ${variant}`, execOpts);
+    execSync(`${execCommand} exec blueprint${pkgManager === 'pnpm' ? '' : ' --'} create ${contractName} --type ${variant}`, execOpts);
 
     try {
         execSync('git init', execOpts);

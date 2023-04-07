@@ -5,6 +5,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.3.0] - 2023-04-07
+
+### Changed
+
+- Updated template dependencies: blueprint to 0.8.0, sandbox to 0.8.0, ton-core to 0.49.0
+- Updated dependencies
+
+### Fixed
+
+- Fixed duplicate contract type question when using pnpm
+
 ## [0.2.0] - 2023-03-27
 
 ### Added
