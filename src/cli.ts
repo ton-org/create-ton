@@ -6,7 +6,7 @@ import inquirer from 'inquirer';
 import chalk from 'chalk';
 
 const PACKAGE_JSON = 'package.json';
-const README_MD = 'README.md`;
+const README_MD = 'README.md';
 
 async function main() {
     console.log();
