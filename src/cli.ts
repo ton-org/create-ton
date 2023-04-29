@@ -6,6 +6,7 @@ import inquirer from 'inquirer';
 import chalk from 'chalk';
 
 const PACKAGE_JSON = 'package.json';
+const README_MD = 'README.md`;
 
 async function main() {
     console.log();
@@ -83,6 +84,11 @@ build
     await fs.writeFile(
         path.join(name, PACKAGE_JSON),
         (await fs.readFile(path.join(basePath, PACKAGE_JSON))).toString().replace('{{name}}', name)
+    );
+    
+    await fs.writeFile(
+        path.join(name, README_MD),
+        (await fs.readFile(path.join(basePath, README_MD))).toString().replace('{{name}}', name)
     );
 
     console.log(`[2/${steps}] Installing dependencies...\n`);
