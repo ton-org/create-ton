@@ -5,8 +5,8 @@ import { execSync, ExecSyncOptionsWithBufferEncoding } from 'child_process';
 import inquirer from 'inquirer';
 import chalk from 'chalk';
 
-const PACKAGE_JSON = 'package.json';
-const README_MD = 'README.md';
+const FILES_WITH_NAME_TEMPLATE = ['package.json', 'README.md'];
+const NAME_TEMPLATE = '{{name}}';
 
 async function main() {
     console.log();
@@ -69,7 +69,7 @@ async function main() {
 
     const basePath = path.join(__dirname, 'template');
     for (const file of await fs.readdir(basePath)) {
-        if (file === PACKAGE_JSON) continue;
+        if (FILES_WITH_NAME_TEMPLATE.includes(file)) continue;
         await fs.copy(path.join(basePath, file), path.join(name, file));
     }
 
@@ -81,15 +81,12 @@ build
 `
     );
 
-    await fs.writeFile(
-        path.join(name, PACKAGE_JSON),
-        (await fs.readFile(path.join(basePath, PACKAGE_JSON))).toString().replace('{{name}}', name)
-    );
-    
-    await fs.writeFile(
-        path.join(name, README_MD),
-        (await fs.readFile(path.join(basePath, README_MD))).toString().replace('{{name}}', name)
-    );
+    for (const file of FILES_WITH_NAME_TEMPLATE) {
+        await fs.writeFile(
+            path.join(name, file),
+            (await fs.readFile(path.join(basePath, file))).toString().replace(NAME_TEMPLATE, name)
+        );
+    }
 
     console.log(`[2/${steps}] Installing dependencies...\n`);
 

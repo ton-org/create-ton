@@ -2,28 +2,28 @@
 
 ## Project structure
 
--   `contracts` - contains the source code of all the smart contracts of the project and their dependencies.
--   `wrappers` - contains the wrapper classes (implementing `Contract` from ton-core) for the contracts, including any [de]serialization primitives and compilation functions.
+-   `contracts` - source code of all the smart contracts of the project and their dependencies.
+-   `wrappers` - wrapper classes (implementing `Contract` from ton-core) for the contracts, including any [de]serialization primitives and compilation functions.
 -   `tests` - tests for the contracts.
--   `scripts` - contains scripts used by the project, mainly the deployment scripts.   
+-   `scripts` - scripts used by the project, mainly the deployment scripts.
 
 ## How to use
 
 ### Build
 
-`yarn blueprint build`
+`npx blueprint build` or `yarn blueprint build`
 
 ### Test
 
-`yarn blueprint test`
+`npx blueprint test` or `yarn blueprint test`
 
-### Deploy
+### Deploy or run another script
 
-`yarn blueprint run`
+`npx blueprint run` or `yarn blueprint run`
 
-### Add new contract
+### Add a new contract
 
-`yarn blueprint create ContractName`
+`npx blueprint create ContractName` or `yarn blueprint create ContractName`
 
 # License
 MIT
