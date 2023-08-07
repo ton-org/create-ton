@@ -24,6 +24,3 @@
 ### Add a new contract
 
 `npx blueprint create ContractName` or `yarn blueprint create ContractName`
-
-# License
-MIT
