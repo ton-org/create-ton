@@ -2,6 +2,8 @@
     "name": "{{name}}",
     "version": "0.0.1",
     "scripts": {
+        "start": "blueprint run",
+        "build": "blueprint build",
         "test": "jest"
     },
     "devDependencies": {
