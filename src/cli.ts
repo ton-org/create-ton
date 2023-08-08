@@ -8,6 +8,24 @@ import chalk from 'chalk';
 
 const FILES_WITH_NAME_TEMPLATE = ['package.json', 'README.md'];
 const NAME_TEMPLATE = '{{name}}';
+const VARIANT_CHOICES = [
+    {
+        name: 'An empty contract (FunC)',
+        value: 'func-empty',
+    },
+    {
+        name: 'A simple counter contract (FunC)',
+        value: 'func-counter',
+    },
+    {
+        name: 'An empty contract (TACT)',
+        value: 'tact-empty',
+    },
+    {
+        name: 'A simple counter contract (TACT)',
+        value: 'tact-counter',
+    },
+];
 
 async function main() {
     console.log();
@@ -43,7 +61,7 @@ async function main() {
         throw new Error(`Cannot create a contract with the name '${contractName}'`);
 
     const argsVariant =
-        ['func-empty', 'func-counter', 'tact-empty', 'tact-counter'].indexOf(localArgs['--type'] || '') !== -1
+        VARIANT_CHOICES.map(e => e.value).indexOf(localArgs['--type'] || '') !== -1
             ? localArgs['--type']
             : undefined;
 
@@ -55,24 +73,7 @@ async function main() {
                     name: 'variant',
                     message: 'Choose the project template',
                     type: 'list',
-                    choices: [
-                        {
-                            name: 'An empty contract (FunC)',
-                            value: 'func-empty',
-                        },
-                        {
-                            name: 'A simple counter contract (FunC)',
-                            value: 'func-counter',
-                        },
-                        {
-                            name: 'An empty contract (TACT)',
-                            value: 'tact-empty',
-                        },
-                        {
-                            name: 'A simple counter contract (TACT)',
-                            value: 'tact-counter',
-                        },
-                    ],
+                    choices: VARIANT_CHOICES,
                 },
             ])
         ).variant;
