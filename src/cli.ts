@@ -3,6 +3,7 @@ import fs from 'fs-extra';
 import path from 'path';
 import { execSync, ExecSyncOptionsWithBufferEncoding } from 'child_process';
 import inquirer from 'inquirer';
+import arg from 'arg';
 import chalk from 'chalk';
 
 const FILES_WITH_NAME_TEMPLATE = ['package.json', 'README.md'];
@@ -11,55 +12,71 @@ const NAME_TEMPLATE = '{{name}}';
 async function main() {
     console.log();
 
+    const localArgs = arg({
+        '--name': String,
+        '--type': String,
+        '--contractName': String,
+    });
+
     const name: string =
-        process.argv.length > 2
-            ? process.argv[2]
-            : (
-                  await inquirer.prompt({
-                      name: 'name',
-                      message: 'Project name',
-                  })
-              ).name.trim();
+        localArgs['--name'] ||
+        (
+            await inquirer.prompt({
+                name: 'name',
+                message: 'Project name',
+            })
+        ).name.trim();
 
     if (name.length === 0) throw new Error('Cannot initialize a project with an empty name');
 
-    const contractName: string = (
-        await inquirer.prompt({
-            name: 'contractName',
-            message: 'First created contract name (PascalCase)',
-        })
-    ).contractName.trim();
+    const contractName: string =
+        localArgs['--contractName'] ||
+        (
+            await inquirer.prompt({
+                name: 'contractName',
+                message: 'First created contract name (PascalCase)',
+            })
+        ).contractName.trim();
 
     if (contractName.length === 0) throw new Error(`Cannot create a contract with an empty name`);
 
     if (contractName.toLowerCase() === 'contract' || !/^[A-Z][a-zA-Z0-9]*$/.test(contractName))
         throw new Error(`Cannot create a contract with the name '${contractName}'`);
 
-    const { variant }: { variant: string } = await inquirer.prompt([
-        {
-            name: 'variant',
-            message: 'Choose the project template',
-            type: 'list',
-            choices: [
+    const argsVariant =
+        ['func-empty', 'func-counter', 'tact-empty', 'tact-counter'].indexOf(localArgs['--type'] || '') !== -1
+            ? localArgs['--type']
+            : undefined;
+
+    const variant: string =
+        argsVariant ||
+        (
+            await inquirer.prompt([
                 {
-                    name: 'An empty contract (FunC)',
-                    value: 'func-empty',
+                    name: 'variant',
+                    message: 'Choose the project template',
+                    type: 'list',
+                    choices: [
+                        {
+                            name: 'An empty contract (FunC)',
+                            value: 'func-empty',
+                        },
+                        {
+                            name: 'A simple counter contract (FunC)',
+                            value: 'func-counter',
+                        },
+                        {
+                            name: 'An empty contract (TACT)',
+                            value: 'tact-empty',
+                        },
+                        {
+                            name: 'A simple counter contract (TACT)',
+                            value: 'tact-counter',
+                        },
+                    ],
                 },
-                {
-                    name: 'A simple counter contract (FunC)',
-                    value: 'func-counter',
-                },
-                {
-                    name: 'An empty contract (TACT)',
-                    value: 'tact-empty',
-                },
-                {
-                    name: 'A simple counter contract (TACT)',
-                    value: 'tact-counter',
-                },
-            ],
-        },
-    ]);
+            ])
+        ).variant;
 
     await fs.mkdir(name);
 
