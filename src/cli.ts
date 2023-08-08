@@ -13,13 +13,12 @@ async function main() {
     console.log();
 
     const localArgs = arg({
-        '--name': String,
         '--type': String,
         '--contractName': String,
     });
 
     const name: string =
-        localArgs['--name'] ||
+        localArgs._[0] ||
         (
             await inquirer.prompt({
                 name: 'name',
