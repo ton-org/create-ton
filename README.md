@@ -17,4 +17,4 @@ npm create ton -- project-dir --type first-contract-type --contractName FirstCon
 ```
 where `first-contract-type` can currently be one of `func-empty`, `func-counter`, `tact-empty`, `tact-counter`
 
-For more details please go to https://github.com/ton-community/blueprint
+For more details please go to https://github.com/ton-org/blueprint
