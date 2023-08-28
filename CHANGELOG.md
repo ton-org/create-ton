@@ -5,6 +5,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.9.0] - 2023-08-28
+
+### Removed
+
+- Removed flag `--path`
+
+### Changed
+
+- The project name (asked interactively or passed in CLI non-interactively) is now resolved as a path to get the full project path, and the basename (last segment) of that path is taken as the actual project name. For example, running `create-ton .` in a directory named `test-project` will create the project in that very directory (without creating any subdirectories) with the name `test-project`
+
 ## [0.8.0] - 2023-08-28
 
 ### Added

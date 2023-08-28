@@ -33,10 +33,9 @@ async function main() {
     const localArgs = arg({
         '--type': String,
         '--contractName': String,
-        '--path': String,
     });
 
-    const name: string =
+    const desiredProjectName: string =
         localArgs._[0] ||
         (
             await inquirer.prompt({
@@ -44,6 +43,10 @@ async function main() {
                 message: 'Project name',
             })
         ).name.trim();
+
+    const projectPath = path.resolve(desiredProjectName);
+
+    const name = path.basename(projectPath);
 
     if (name.length === 0) throw new Error('Cannot initialize a project with an empty name');
 
@@ -78,8 +81,6 @@ async function main() {
                 },
             ])
         ).variant;
-
-    const projectPath = localArgs['--path'] || name;
 
     await fs.mkdir(projectPath, {
         recursive: true,
@@ -166,7 +167,7 @@ build
     console.log(``);
     console.log(`Your new project is ready, available commands:`);
     console.log(``);
-    console.log(chalk.greenBright(` >  `) + chalk.cyanBright(`cd ${projectPath}`));
+    console.log(chalk.greenBright(` >  `) + chalk.cyanBright(`cd ${desiredProjectName}`));
     console.log(` change directory to your new project`);
     console.log(``);
     console.log(chalk.greenBright(` >  `) + chalk.cyanBright(`npx blueprint build`));
