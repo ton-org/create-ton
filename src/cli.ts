@@ -33,6 +33,7 @@ async function main() {
     const localArgs = arg({
         '--type': String,
         '--contractName': String,
+        '--path': String,
     });
 
     const name: string =
@@ -78,7 +79,11 @@ async function main() {
             ])
         ).variant;
 
-    await fs.mkdir(name);
+    const projectPath = localArgs['--path'] || name;
+
+    await fs.mkdir(projectPath, {
+        recursive: true,
+    });
 
     const steps = 3;
 
@@ -87,11 +92,11 @@ async function main() {
     const basePath = path.join(__dirname, 'template');
     for (const file of await fs.readdir(basePath)) {
         if (FILES_WITH_NAME_TEMPLATE.includes(file)) continue;
-        await fs.copy(path.join(basePath, file), path.join(name, file));
+        await fs.copy(path.join(basePath, file), path.join(projectPath, file));
     }
 
     await fs.writeFile(
-        path.join(name, '.gitignore'),
+        path.join(projectPath, '.gitignore'),
         `node_modules
 temp
 build
@@ -100,7 +105,7 @@ build
 
     for (const file of FILES_WITH_NAME_TEMPLATE) {
         await fs.writeFile(
-            path.join(name, file),
+            path.join(projectPath, file),
             (await fs.readFile(path.join(basePath, file))).toString().replace(NAME_TEMPLATE, name)
         );
     }
@@ -109,7 +114,7 @@ build
 
     const execOpts: ExecSyncOptionsWithBufferEncoding = {
         stdio: 'inherit',
-        cwd: name,
+        cwd: projectPath,
     };
 
     const pkgManager = (process.env.npm_config_user_agent ?? 'npm/').split(' ')[0].split('/')[0];
@@ -161,7 +166,7 @@ build
     console.log(``);
     console.log(`Your new project is ready, available commands:`);
     console.log(``);
-    console.log(chalk.greenBright(` >  `) + chalk.cyanBright(`cd ${name}`));
+    console.log(chalk.greenBright(` >  `) + chalk.cyanBright(`cd ${projectPath}`));
     console.log(` change directory to your new project`);
     console.log(``);
     console.log(chalk.greenBright(` >  `) + chalk.cyanBright(`npx blueprint build`));
