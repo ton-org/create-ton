@@ -101,6 +101,8 @@ async function main() {
         `node_modules
 temp
 build
+dist
+.DS_Store
 `
     );
 
