@@ -4,7 +4,7 @@
     "scripts": {
         "start": "blueprint run",
         "build": "blueprint build",
-        "test": "jest"
+        "test": "jest --verbose"
     },
     "devDependencies": {
         "@ton-community/blueprint": "^0.12.0",
