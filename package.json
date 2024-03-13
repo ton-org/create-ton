@@ -1,12 +1,12 @@
 {
     "name": "create-ton",
-    "version": "0.11.1",
+    "version": "0.12.0",
     "license": "MIT",
     "description": "Tool to quickly create TON projects",
     "author": "TonTech",
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/ton-community/create-ton.git"
+        "url": "git+https://github.com/ton-org/create-ton.git"
     },
     "files": [
         "dist/**/*"
