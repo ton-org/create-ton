@@ -152,7 +152,7 @@ dist
             break;
     }
     execSync(
-        `${execCommand} exec blueprint${pkgManager === 'pnpm' ? '' : ' --'} create ${contractName} --type ${variant}`,
+        `${execCommand} ${pkgManager !== 'bun' ? 'exec' : 'x'} blueprint${pkgManager === 'pnpm' ? '' : ' --'} create ${contractName} --type ${variant}`,
         execOpts
     );
 
