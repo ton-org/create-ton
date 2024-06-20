@@ -129,6 +129,9 @@ dist
         case 'pnpm':
             execSync('pnpm install', execOpts);
             break;
+        case 'bun':
+            execSync('bun install', execOpts);
+            break;
         default:
             execSync('npm install', execOpts);
             break;
@@ -143,6 +146,9 @@ dist
             break;
         case 'pnpm':
             execCommand = 'pnpm';
+            break;
+        case 'bun':
+            execCommand = 'bun';
             break;
     }
     execSync(
