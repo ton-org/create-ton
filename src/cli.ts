@@ -139,20 +139,20 @@ dist
 
     console.log(`\n[3/${steps}] Creating your first contract...`);
 
-    let execCommand = 'npm';
+    let execCommand = 'npm exec';
     switch (pkgManager) {
         case 'yarn':
-            execCommand = 'yarn';
+            execCommand = 'yarn exec';
             break;
         case 'pnpm':
-            execCommand = 'pnpm';
+            execCommand = 'pnpm exec';
             break;
         case 'bun':
-            execCommand = 'bun';
+            execCommand = 'bun x';
             break;
     }
     execSync(
-        `${execCommand} ${pkgManager !== 'bun' ? 'exec' : 'x'} blueprint${pkgManager === 'pnpm' || pkgManager === 'bun' ? '' : ' --'} create ${contractName} --type ${variant}`,
+        `${execCommand} blueprint${pkgManager === 'pnpm' || pkgManager === 'bun' ? '' : ' --'} create ${contractName} --type ${variant}`,
         execOpts
     );
 
