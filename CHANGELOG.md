@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Bun was added as one of the possible package managers of the user. Ref: v0.2.0
 - `execCommand` variable which is used to call `blueprint` cli now actually stores package manager's exec command instead of primary package manager command e.g. `npm` for npm or `yarn` for yarn
+
 ## [0.15.0] - 2024-06-19
 
 ### Changed
