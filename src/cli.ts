@@ -103,6 +103,17 @@ temp
 build
 dist
 .DS_Store
+
+# VS Code
+.vscode/*
+.history/
+*.vsix
+
+# IDEA files
+.idea
+
+# VIM
+Session.vim
 `
     );
 
