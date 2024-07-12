@@ -153,7 +153,7 @@ Session.vim
     let execCommand = 'npm exec';
     switch (pkgManager) {
         case 'yarn':
-            execCommand = 'yarn exec';
+            execCommand = 'yarn run';
             break;
         case 'pnpm':
             execCommand = 'pnpm exec';
