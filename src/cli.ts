@@ -147,17 +147,17 @@ Session.vim
 
     console.log(`\n[3/${steps}] Creating your first contract...`);
 
-    let execCommand = 'npm';
+    let execCommand = 'npm exec';
     switch (pkgManager) {
         case 'yarn':
-            execCommand = 'yarn';
+            execCommand = 'yarn run';
             break;
         case 'pnpm':
-            execCommand = 'pnpm';
+            execCommand = 'pnpm exec';
             break;
     }
     execSync(
-        `${execCommand} exec blueprint${pkgManager === 'pnpm' ? '' : ' --'} create ${contractName} --type ${variant}`,
+        `${execCommand} blueprint${pkgManager === 'pnpm' ? '' : ' --'} create ${contractName} --type ${variant}`,
         execOpts
     );
 
