@@ -140,6 +140,9 @@ Session.vim
         case 'pnpm':
             execSync('pnpm install', execOpts);
             break;
+        case 'bun':
+            execSync('bun install', execOpts);
+            break;
         default:
             execSync('npm install', execOpts);
             break;
@@ -155,9 +158,12 @@ Session.vim
         case 'pnpm':
             execCommand = 'pnpm exec';
             break;
+        case 'bun':
+            execCommand = 'bun x';
+            break;
     }
     execSync(
-        `${execCommand} blueprint${pkgManager === 'pnpm' ? '' : ' --'} create ${contractName} --type ${variant}`,
+        `${execCommand} blueprint${pkgManager !== 'npm' ? '' : ' --'} create ${contractName} --type ${variant}`,
         execOpts
     );
 
