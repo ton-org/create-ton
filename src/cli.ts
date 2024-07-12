@@ -147,19 +147,28 @@ Session.vim
 
     console.log(`\n[3/${steps}] Creating your first contract...`);
 
-    let execCommand = 'npm';
-    switch (pkgManager) {
-        case 'yarn':
-            execCommand = 'yarn';
-            break;
-        case 'pnpm':
-            execCommand = 'pnpm';
-            break;
+    const execArgs = `create ${contractName} --type ${variant}`;
+
+    // below is fix for windows. Windows does not accept yarn exec to find binaries somehow so binary path specified directly
+    if (pkgManager === 'yarn' && process.platform === 'win32') {
+        const blueprintBinariesPath = path.join(projectPath, 'node_modules', '.bin', 'blueprint');
+        execSync(`${blueprintBinariesPath} ${execArgs}`, execOpts);
+    } else {
+        let execCommand = 'npm';
+        switch (pkgManager) {
+            case 'yarn':
+                execCommand = 'yarn';
+                break;
+            case 'pnpm':
+                execCommand = 'pnpm';
+                break;
+        }
+        execSync(
+            `${execCommand} exec blueprint${pkgManager === 'pnpm' ? '' : ' --'} ${execArgs}`,
+            execOpts
+        );
     }
-    execSync(
-        `${execCommand} exec blueprint${pkgManager === 'pnpm' ? '' : ' --'} create ${contractName} --type ${variant}`,
-        execOpts
-    );
+
 
     try {
         execSync('git init', execOpts);
