@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Updated template .gitignore
+- Updated template dependencies
 
 ## [0.14.0] - 2024-05-27
 
