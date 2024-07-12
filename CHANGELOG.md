@@ -5,14 +5,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [0.15.1] - 2024-06-24
+## [0.15.0] - 2024-07-12
 
-### Changed
+### Added
 
-- Bun was added as one of the possible package managers of the user. Ref: v0.2.0
-- `execCommand` variable which is used to call `blueprint` cli now actually stores package manager's exec command instead of primary package manager command e.g. `npm` for npm or `yarn` for yarn
-
-## [0.15.0] - 2024-06-19
+- Added Bun support
 
 ### Changed
 

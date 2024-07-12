@@ -163,7 +163,7 @@ Session.vim
             break;
     }
     execSync(
-        `${execCommand} blueprint${pkgManager === 'pnpm' || pkgManager === 'bun' ? '' : ' --'} create ${contractName} --type ${variant}`,
+        `${execCommand} blueprint${pkgManager !== 'npm' ? '' : ' --'} create ${contractName} --type ${variant}`,
         execOpts
     );
 
