@@ -144,7 +144,7 @@ Session.vim
             execSync('bun install', execOpts);
             break;
         default:
-            execSync('npm install', execOpts);
+            execSync('npm install --ignore-scripts', execOpts);
             break;
     }
 
