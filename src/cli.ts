@@ -8,18 +8,27 @@ import chalk from 'chalk';
 
 const FILES_WITH_NAME_TEMPLATE = ['package.json', 'README.md'];
 const NAME_TEMPLATE = '{{name}}';
+
 const VARIANT_CHOICES = [
     {
         name: 'An empty contract (FunC)',
         value: 'func-empty',
     },
     {
-        name: 'A simple counter contract (FunC)',
-        value: 'func-counter',
+        name: 'An empty contract (Tolk)',
+        value: 'tolk-empty',
     },
     {
         name: 'An empty contract (TACT)',
         value: 'tact-empty',
+    },
+    {
+        name: 'A simple counter contract (FunC)',
+        value: 'func-counter',
+    },
+    {
+        name: 'A simple counter contract (Tolk)',
+        value: 'tolk-counter',
     },
     {
         name: 'A simple counter contract (TACT)',
