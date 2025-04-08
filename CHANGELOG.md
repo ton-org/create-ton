@@ -11,6 +11,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Added flag `--no-ci` to skip installation of dependencies, git init and creation of the first contract via Blueprint
 
+## [0.22.0] - 2025-04-07
+
+### Changed
+
+- Updated template dependencies
+
 ## [0.21.0] - 2025-03-02
 
 ### Changed

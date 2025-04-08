@@ -1,6 +1,6 @@
 {
     "name": "create-ton",
-    "version": "0.21.0",
+    "version": "0.22.0",
     "license": "MIT",
     "description": "Tool to quickly create TON projects",
     "author": "TonTech",
