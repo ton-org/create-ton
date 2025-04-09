@@ -2,6 +2,7 @@
     "name": "{{name}}",
     "version": "0.0.1",
     "scripts": {
+        "bp": "blueprint",
         "start": "blueprint run",
         "build": "blueprint build",
         "test": "jest --verbose"
