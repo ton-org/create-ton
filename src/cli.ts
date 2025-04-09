@@ -19,7 +19,7 @@ const VARIANT_CHOICES = [
         value: 'tolk-empty',
     },
     {
-        name: 'An empty contract (TACT)',
+        name: 'An empty contract (Tact)',
         value: 'tact-empty',
     },
     {
@@ -31,7 +31,7 @@ const VARIANT_CHOICES = [
         value: 'tolk-counter',
     },
     {
-        name: 'A simple counter contract (TACT)',
+        name: 'A simple counter contract (Tact)',
         value: 'tact-counter',
     },
 ];
