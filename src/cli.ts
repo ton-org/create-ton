@@ -19,7 +19,7 @@ const VARIANT_CHOICES = [
         value: 'tolk-empty',
     },
     {
-        name: 'An empty contract (TACT)',
+        name: 'An empty contract (Tact)',
         value: 'tact-empty',
     },
     {
@@ -31,7 +31,7 @@ const VARIANT_CHOICES = [
         value: 'tolk-counter',
     },
     {
-        name: 'A simple counter contract (TACT)',
+        name: 'A simple counter contract (Tact)',
         value: 'tact-counter',
     },
 ];
@@ -40,9 +40,11 @@ async function main() {
     console.log();
 
     const localArgs = arg({
-        '--type': String,
-        '--contractName': String,
-    });
+        '--type': String, // one of the VARIANT_CHOICES
+        '--contractName': String, // PascalCase name for the contract
+        '--no-ci': Boolean, // whether to skip installation of dependendencies, git init
+                            // and creation of the first contract via Blueprint
+     });
 
     const desiredProjectName: string =
         localArgs._[0] ||
@@ -59,8 +61,10 @@ async function main() {
 
     if (name.length === 0) throw new Error('Cannot initialize a project with an empty name');
 
+    const noCi = localArgs['--no-ci'] ?? false;
+
     const contractName: string =
-        localArgs['--contractName'] ||
+        (noCi ? 'NonExistent' : localArgs['--contractName']) ||
         (
             await inquirer.prompt({
                 name: 'contractName',
@@ -68,10 +72,12 @@ async function main() {
             })
         ).contractName.trim();
 
-    if (contractName.length === 0) throw new Error(`Cannot create a contract with an empty name`);
+    if (!noCi) {
+        if (contractName.length === 0) throw new Error(`Cannot create a contract with an empty name`);
 
-    if (contractName.toLowerCase() === 'contract' || !/^[A-Z][a-zA-Z0-9]*$/.test(contractName))
-        throw new Error(`Cannot create a contract with the name '${contractName}'`);
+        if (contractName.toLowerCase() === 'contract' || !/^[A-Z][a-zA-Z0-9]*$/.test(contractName))
+            throw new Error(`Cannot create a contract with the name '${contractName}'`);
+    }
 
     const argsVariant =
         VARIANT_CHOICES.map(e => e.value).indexOf(localArgs['--type'] || '') !== -1
@@ -79,7 +85,7 @@ async function main() {
             : undefined;
 
     const variant: string =
-        argsVariant ||
+        (noCi ? 'none' : argsVariant) ||
         (
             await inquirer.prompt([
                 {
@@ -95,7 +101,7 @@ async function main() {
         recursive: true,
     });
 
-    const steps = 3;
+    const steps = noCi ? 2 : 3;
 
     console.log(`\n[1/${steps}] Copying files...`);
 
@@ -123,6 +129,12 @@ dist
 
 # VIM
 Session.vim
+.vim/
+
+# Other private editor folders
+.nvim/
+.emacs/
+.helix/
 `
     );
 
@@ -133,7 +145,13 @@ Session.vim
         );
     }
 
-    console.log(`[2/${steps}] Installing dependencies...\n`);
+    if (noCi) {
+        console.log(`[2/${steps}] Skipping dependencies, git init and contract creation...\n`);
+        printResultingUsageDetails(desiredProjectName, noCi);
+        return;
+    } else {
+        console.log(`[2/${steps}] Installing dependencies...\n`);
+    }
 
     const execOpts: ExecSyncOptionsWithBufferEncoding = {
         stdio: 'inherit',
@@ -182,6 +200,10 @@ Session.vim
         console.error('Failed to initialize git repository:', (e as any).toString());
     }
 
+    printResultingUsageDetails(desiredProjectName, noCi);
+}
+
+function printResultingUsageDetails(desiredProjectName: string, noCi: boolean) {
     console.log(`Success!`);
     console.log(
         chalk.blueBright(`
@@ -193,7 +215,12 @@ Session.vim
     );
     console.log(chalk.blue(`                     TON development for professionals`));
     console.log(``);
-    console.log(`Your new project is ready, available commands:`);
+    if (noCi) {
+        console.log(`Your new project is almost ready!`);
+        console.log(`Install dependencies before running available commands:`);
+    } else {
+        console.log(`Your new project is ready, available commands:`);
+    }
     console.log(``);
     console.log(chalk.greenBright(` >  `) + chalk.cyanBright(`cd ${desiredProjectName}`));
     console.log(` change directory to your new project`);
@@ -205,10 +232,10 @@ Session.vim
     console.log(` run the default project test suite`);
     console.log(``);
     console.log(chalk.greenBright(` >  `) + chalk.cyanBright(`npx blueprint run`));
-    console.log(` choose a script and run it (eg. a deploy script)`);
+    console.log(` choose a script and run it (e.g., a deploy script)`);
     console.log(``);
     console.log(chalk.greenBright(` >  `) + chalk.cyanBright(`npx blueprint create AnotherContract`));
-    console.log(` create all the necessary files for another new contract`);
+    console.log(` create a new contract and all related necessary files`);
     console.log(``);
     console.log(`For help and docs visit https://github.com/ton-community/blueprint`);
     console.log(``);
