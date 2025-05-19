@@ -11,6 +11,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Update template to allow wrappers publishing
 
+## [0.25.0] - 2025-05-16
+
+### Changed
+
+- Updated template dependencies
+
 ## [0.24.0] - 2025-05-02
 
 ### Added

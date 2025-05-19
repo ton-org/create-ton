@@ -12,8 +12,8 @@
         "@ton/core": "~0"
     },
     "devDependencies": {
-        "@ton/blueprint": ">=0.33.0",
-        "@ton/sandbox": ">=0.28.0",
+        "@ton/blueprint": ">=0.34.0",
+        "@ton/sandbox": ">=0.30.0",
         "@ton/test-utils": ">=0.6.0",
         "@types/jest": "^29.5.14",
         "@types/node": "^22.14.1",
@@ -24,8 +24,8 @@
         "ts-jest": "^29.3.2",
         "ts-node": "^10.9.2",
         "typescript": "^5.8.3",
-        "@ton/tolk-js": ">=0.11.0",
-        "@tact-lang/compiler": ">=1.6.6 <2.0.0",
+        "@ton/tolk-js": ">=0.12.0",
+        "@tact-lang/compiler": ">=1.6.10 <2.0.0",
         "@ton-community/func-js": ">=0.9.1"
     }
 }
