@@ -9,7 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- Use `@ton/sandbox/jest-environment` and `@ton/sandbox/jest-reporter` in jest config for the new `blueprint snapshot` and `blueprint test --gas-report` features
+- Template now uses `@ton/sandbox/jest-environment` and `@ton/sandbox/jest-reporter` in jest config for the new `blueprint snapshot` and `blueprint test --gas-report` features
+- Update template to allow wrappers publishing
 
 ## [0.25.0] - 2025-05-16
 
