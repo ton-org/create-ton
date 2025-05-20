@@ -118,6 +118,7 @@ temp
 build
 dist
 .DS_Store
+package.ts
 
 # VS Code
 .vscode/*
