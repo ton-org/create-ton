@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- Use in jest config `@ton/sandbox/jest-environment` and `@ton/sandbox/jest-reporter` for commands `blueprint snapshot` and `blueprint test --gas-report`
+- Use `@ton/sandbox/jest-environment` and `@ton/sandbox/jest-reporter` in jest config for the new `blueprint snapshot` and `blueprint test --gas-report` features
 
 ## [0.25.0] - 2025-05-16
 
