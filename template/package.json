@@ -12,9 +12,9 @@
         "@ton/core": "~0"
     },
     "devDependencies": {
-        "@ton/blueprint": ">=0.34.0",
-        "@ton/sandbox": ">=0.31.0",
-        "@ton/test-utils": ">=0.6.0",
+        "@ton/blueprint": ">=0.35.0",
+        "@ton/sandbox": ">=0.32.0",
+        "@ton/test-utils": ">=0.7.0",
         "@types/jest": "^29.5.14",
         "@types/node": "^22.14.1",
         "jest": "^29.7.0",
