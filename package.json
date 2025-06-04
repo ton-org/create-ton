@@ -14,8 +14,8 @@
     "bin": "./dist/cli.js",
     "prettier": "@ton/toolchain/prettier",
     "scripts": {
-        "lint": "npx eslint .",
-        "lint:fix": "npx eslint . --fix",
+        "lint": "eslint .",
+        "lint:fix": "eslint . --fix",
         "test": "echo \"Error: no test specified\" && exit 0",
         "build": "rm -rf dist && tsc && cp -r template dist/template"
     },
@@ -24,7 +24,8 @@
         "@types/fs-extra": "^11.0.1",
         "@types/inquirer": "^8.2.6",
         "@types/node": "^20.2.5",
-        "prettier": "^2.8.8",
+        "eslint": "^9.28.0",
+        "prettier": "^3.5.3",
         "typescript": "^4.9.5"
     },
     "dependencies": {
