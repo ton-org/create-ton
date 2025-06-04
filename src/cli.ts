@@ -1,7 +1,8 @@
 #!/usr/bin/env node
-import fs from 'fs-extra';
 import path from 'path';
 import { execSync, ExecSyncOptionsWithBufferEncoding } from 'child_process';
+
+import fs from 'fs-extra';
 import inquirer from 'inquirer';
 import arg from 'arg';
 import chalk from 'chalk';
@@ -43,8 +44,8 @@ async function main() {
         '--type': String, // one of the VARIANT_CHOICES
         '--contractName': String, // PascalCase name for the contract
         '--no-ci': Boolean, // whether to skip installation of dependendencies, git init
-                            // and creation of the first contract via Blueprint
-     });
+        // and creation of the first contract via Blueprint
+    });
 
     const desiredProjectName: string =
         localArgs._[0] ||
@@ -80,9 +81,7 @@ async function main() {
     }
 
     const argsVariant =
-        VARIANT_CHOICES.map(e => e.value).indexOf(localArgs['--type'] || '') !== -1
-            ? localArgs['--type']
-            : undefined;
+        VARIANT_CHOICES.map((e) => e.value).indexOf(localArgs['--type'] || '') !== -1 ? localArgs['--type'] : undefined;
 
     const variant: string =
         (noCi ? 'none' : argsVariant) ||
@@ -136,13 +135,13 @@ Session.vim
 .nvim/
 .emacs/
 .helix/
-`
+`,
     );
 
     for (const file of FILES_WITH_NAME_TEMPLATE) {
         await fs.writeFile(
             path.join(projectPath, file),
-            (await fs.readFile(path.join(basePath, file))).toString().replace(NAME_TEMPLATE, name)
+            (await fs.readFile(path.join(basePath, file))).toString().replace(NAME_TEMPLATE, name),
         );
     }
 
@@ -192,13 +191,17 @@ Session.vim
     }
     execSync(
         `${execCommand} blueprint${pkgManager !== 'npm' ? '' : ' --'} create ${contractName} --type ${variant}`,
-        execOpts
+        execOpts,
     );
 
     try {
         execSync('git init', execOpts);
     } catch (e) {
-        console.error('Failed to initialize git repository:', (e as any).toString());
+        if (e instanceof Error) {
+            console.error('Failed to initialize git repository:', e.message);
+        } else {
+            console.error('Failed to initialize git repository:', String(e));
+        }
     }
 
     printResultingUsageDetails(desiredProjectName, noCi);
@@ -212,7 +215,7 @@ function printResultingUsageDetails(desiredProjectName: string, noCi: boolean) {
     | __ )| |  | | | | ____|  _ \\|  _ \\|_ _| \\ | |_   _|
     |  _ \\| |  | | | |  _| | |_) | |_) || ||  \\| | | |  
     | |_) | |__| |_| | |___|  __/|  _ < | || |\\  | | |  
-    |____/|_____\\___/|_____|_|   |_| \\_\\___|_| \\_| |_|  `)
+    |____/|_____\\___/|_____|_|   |_| \\_\\___|_| \\_| |_|  `),
     );
     console.log(chalk.blue(`                     TON development for professionals`));
     console.log(``);

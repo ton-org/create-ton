@@ -12,10 +12,15 @@
         "dist/**/*"
     ],
     "bin": "./dist/cli.js",
+    "prettier": "@ton/toolchain/prettier",
     "scripts": {
+        "lint": "npx eslint .",
+        "lint:fix": "npx eslint . --fix",
+        "test": "echo \"Error: no test specified\" && exit 0",
         "build": "rm -rf dist && tsc && cp -r template dist/template"
     },
     "devDependencies": {
+        "@ton/toolchain": "the-ton-tech/toolchain#v1.4.0",
         "@types/fs-extra": "^11.0.1",
         "@types/inquirer": "^8.2.6",
         "@types/node": "^20.2.5",
