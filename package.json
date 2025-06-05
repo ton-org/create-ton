@@ -14,8 +14,8 @@
     "bin": "./dist/cli.js",
     "prettier": "@ton/toolchain/prettier",
     "scripts": {
-        "lint": "eslint .",
-        "lint:fix": "eslint . --fix",
+        "lint": "eslint . --max-warnings 0",
+        "lint:fix": "eslint . --max-warnings 0 --fix",
         "test": "echo \"Error: no test specified\" && exit 0",
         "build": "rm -rf dist && tsc && cp -r template dist/template"
     },
