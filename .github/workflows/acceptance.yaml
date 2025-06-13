@@ -1,0 +1,39 @@
+name: Acceptance Test
+
+on:
+  schedule:
+    - cron: '0 0 * * *'   # every day at midnight UTC
+  workflow_dispatch:      # manual start
+
+jobs:
+  create-ton-latest:
+    runs-on: ${{ matrix.platform.on }}
+    strategy:
+      fail-fast: false
+      matrix:
+        platform:
+          - { on: ubuntu-24.04, name: linux }
+          - { on: windows-2025, name: windows }
+          - { on: macos-15, name: macos }
+        node:
+          - 22
+        type:
+          - tact-counter
+          - func-counter
+          - tolk-counter
+
+    name: ${{ matrix.type }} on ${{ matrix.platform.name }} & node ${{ matrix.node }}
+    steps:
+      - name: Set up Node.js ${{ matrix.node }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+
+      - name: Create project ${{ matrix.type }}
+        shell: bash
+        # language=bash
+        run: |
+          npm create ton@latest -y -- ${{ matrix.type }} --type ${{ matrix.type }} --contractName Counter
+          cd ${{ matrix.type }}
+          npm run build -- --all
+          npm test
