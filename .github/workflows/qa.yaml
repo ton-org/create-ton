@@ -5,11 +5,17 @@ on:
     paths-ignore:
       - '.github/workflows/acceptance.yaml'
       - '.github/workflows/reward.yml'
+      - '.github/ISSUE_TEMPLATE/*'
       - '*.md'
     branches:
       - main
       - develop
   pull_request:
+    paths-ignore:
+      - '.github/workflows/acceptance.yaml'
+      - '.github/workflows/reward.yml'
+      - '.github/ISSUE_TEMPLATE/*'
+      - '*.md'
     branches:
       - main
       - develop
