@@ -32,3 +32,51 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: the-ton-tech/toolchain/build@v1.4.0
+      - name: Create pack
+        shell: bash
+        # language=bash
+        run: |
+          yarn pack --out dist/create-ton.tgz
+      - name: Upload dist
+        uses: actions/upload-artifact@v4
+        with:
+          name: dist
+          path: dist/create-ton.tgz
+  acceptance:
+    needs: build
+    runs-on: ${{ matrix.platform.on }}
+    strategy:
+      fail-fast: false
+      matrix:
+        platform:
+          - { on: ubuntu-24.04, name: nix }
+          - { on: windows-2025, name: win }
+          - { on: macos-15, name: mac }
+        node:
+          - 20
+          - 22
+          - 24
+        type:
+          - tact-counter
+          - func-counter
+          - tolk-counter
+    name: ${{ matrix.type }} on ${{ matrix.platform.name }} & node ${{ matrix.node }}
+    steps:
+      - name: Download dist
+        uses: actions/download-artifact@v4
+        with:
+          name: dist
+          path: ./dist
+      - name: Set up Node.js ${{ matrix.node }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+      - name: Create project ${{ matrix.type }}
+        shell: bash
+        # language=bash
+        run: |
+          npm install --global ./dist/create-ton.tgz
+          npx create-ton ${{ matrix.type }} --type ${{ matrix.type }} --contractName Counter
+          cd ${{ matrix.type }}
+          npm run build -- --all
+          npm test
