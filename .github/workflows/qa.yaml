@@ -5,6 +5,7 @@ on:
     paths-ignore:
       - '.github/workflows/acceptance.yaml'
       - '.github/workflows/reward.yml'
+      - '.github/workflows/reward-merged-prs.yml'
       - '.github/ISSUE_TEMPLATE/*'
       - '*.md'
     branches:
@@ -14,6 +15,7 @@ on:
     paths-ignore:
       - '.github/workflows/acceptance.yaml'
       - '.github/workflows/reward.yml'
+      - '.github/workflows/reward-merged-prs.yml'
       - '.github/ISSUE_TEMPLATE/*'
       - '*.md'
     branches:
