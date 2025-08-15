@@ -6,8 +6,15 @@ import inquirer from 'inquirer';
 import arg from 'arg';
 import chalk from 'chalk';
 
-const FILES_WITH_NAME_TEMPLATE = ['package.json', 'README.md'];
-const NAME_TEMPLATE = '{{name}}';
+const TEMPLATES = ['package.json', 'README.md', path.join('.github', 'workflows', 'ci.yml')];
+
+export function executeTemplate(contents: string, replaces: { [k: string]: string }) {
+    for (const k in replaces) {
+        contents = contents.replaceAll(`{{${k}}}`, replaces[k]);
+    }
+
+    return contents;
+}
 
 const VARIANT_CHOICES = [
     {
@@ -35,6 +42,31 @@ const VARIANT_CHOICES = [
         value: 'tact-counter',
     },
 ];
+
+const gitIgnoreContent = `node_modules
+temp
+build
+dist
+.DS_Store
+package.ts
+
+# VS Code
+.vscode/*
+.history/
+*.vsix
+
+# IDEA files
+.idea
+
+# VIM
+Session.vim
+.vim/
+
+# Other private editor folders
+.nvim/
+.emacs/
+.helix/
+`;
 
 export async function main() {
     console.log();
@@ -103,44 +135,25 @@ export async function main() {
 
     console.log(`\n[1/${steps}] Copying files...`);
 
+    const pkgManager = (process.env.npm_config_user_agent ?? 'npm/').split(' ')[0].split('/')[0];
+    const installCommand = pkgManager === 'npm' ? 'ci' : 'install --frozen-lockfile';
+
     const basePath = path.join(__dirname, 'template');
-    for (const file of await fs.readdir(basePath)) {
-        if (FILES_WITH_NAME_TEMPLATE.includes(file)) continue;
+    for (const file of await fs.readdir(basePath, { recursive: true, encoding: 'utf-8'})) {
+        if (TEMPLATES.includes(file)) continue;
         await fs.copy(path.join(basePath, file), path.join(projectPath, file));
     }
 
     await fs.writeFile(
         path.join(projectPath, '.gitignore'),
-        `node_modules
-temp
-build
-dist
-.DS_Store
-package.ts
-
-# VS Code
-.vscode/*
-.history/
-*.vsix
-
-# IDEA files
-.idea
-
-# VIM
-Session.vim
-.vim/
-
-# Other private editor folders
-.nvim/
-.emacs/
-.helix/
-`,
+        gitIgnoreContent,
     );
 
-    for (const file of FILES_WITH_NAME_TEMPLATE) {
+    for (const file of TEMPLATES) {
+        const templateContent = await fs.readFile(path.join(basePath, file), 'utf-8');
         await fs.writeFile(
             path.join(projectPath, file),
-            (await fs.readFile(path.join(basePath, file))).toString().replace(NAME_TEMPLATE, name),
+            executeTemplate(templateContent, {name, pkgManager, installCommand })
         );
     }
 
@@ -157,7 +170,6 @@ Session.vim
         cwd: projectPath,
     };
 
-    const pkgManager = (process.env.npm_config_user_agent ?? 'npm/').split(' ')[0].split('/')[0];
 
     switch (pkgManager) {
         case 'yarn':

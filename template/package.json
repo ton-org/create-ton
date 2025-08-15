@@ -5,6 +5,7 @@
         "bp": "blueprint",
         "start": "blueprint run",
         "build": "blueprint build",
+        "build:all": "blueprint build --all",
         "test": "jest --verbose",
         "release": "blueprint pack && npm publish --access public"
     },

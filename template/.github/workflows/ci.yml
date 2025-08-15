@@ -1,0 +1,25 @@
+name: CI
+
+on: [push]
+
+permissions:
+  contents: read
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22.x'
+
+      - name: Install dependencies
+        run: {{pkgManager}} {{installCommand}}
+
+      - name: Build
+        run: {{pkgManager}} run build:all
+
+      - name: Test
+        run: {{pkgManager}} run test
