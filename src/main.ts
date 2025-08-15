@@ -139,21 +139,18 @@ export async function main() {
     const installCommand = pkgManager === 'npm' ? 'ci' : 'install --frozen-lockfile';
 
     const basePath = path.join(__dirname, 'template');
-    for (const file of await fs.readdir(basePath, { recursive: true, encoding: 'utf-8'})) {
+    for (const file of await fs.readdir(basePath, { recursive: true, encoding: 'utf-8' })) {
         if (TEMPLATES.includes(file)) continue;
         await fs.copy(path.join(basePath, file), path.join(projectPath, file));
     }
 
-    await fs.writeFile(
-        path.join(projectPath, '.gitignore'),
-        gitIgnoreContent,
-    );
+    await fs.writeFile(path.join(projectPath, '.gitignore'), gitIgnoreContent);
 
     for (const file of TEMPLATES) {
         const templateContent = await fs.readFile(path.join(basePath, file), 'utf-8');
         await fs.writeFile(
             path.join(projectPath, file),
-            executeTemplate(templateContent, {name, pkgManager, installCommand })
+            executeTemplate(templateContent, { name, pkgManager, installCommand }),
         );
     }
 
@@ -169,7 +166,6 @@ export async function main() {
         stdio: 'inherit',
         cwd: projectPath,
     };
-
 
     switch (pkgManager) {
         case 'yarn':
