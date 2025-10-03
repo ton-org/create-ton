@@ -5,6 +5,7 @@ import fs from 'fs-extra';
 import inquirer from 'inquirer';
 import arg from 'arg';
 import chalk from 'chalk';
+import { snakeToPascal } from './utils';
 
 const FILES_WITH_NAME_TEMPLATE = ['package.json', 'README.md'];
 const NAME_TEMPLATE = '{{name}}';
@@ -72,12 +73,14 @@ export async function main() {
 
     const noCi = localArgs['--no-ci'] ?? false;
 
+    const defaultContractName = snakeToPascal(name);
     const contractName: string =
         (noCi ? 'NonExistent' : localArgs['--contractName']) ||
         (
             await inquirer.prompt({
                 name: 'contractName',
                 message: 'First created contract name (PascalCase)',
+                default: defaultContractName,
             })
         ).contractName.trim();
 
