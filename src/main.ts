@@ -117,6 +117,7 @@ build
 dist
 .DS_Store
 package.ts
+.env
 
 # VS Code
 .vscode/*
