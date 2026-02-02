@@ -4,6 +4,7 @@ This is an entry point script for the Blueprint development tool
 
 ## Usage
 
+
 ```bash
 npm create ton@latest
 ```
