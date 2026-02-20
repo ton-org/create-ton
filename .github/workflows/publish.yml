@@ -1,4 +1,4 @@
-name: Publish to NPM
+name: Publish to NPM (OIDC)
 
 on:
   push:
@@ -28,7 +28,7 @@ jobs:
         uses: actions/setup-node@v6
         with:
           node-version: '18.x'
-          always-auth: true
+          registry-url: 'https://registry.npmjs.org'
       - name: Install Yarn
         run: npm install -g yarn
 
@@ -43,10 +43,7 @@ jobs:
       - name: Build
         run: yarn build
       - name: Publish
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
         run: |
-          npm config set //registry.npmjs.org/:_authToken "${NODE_AUTH_TOKEN}"
           if [ "${{ github.ref_name }}" = "develop" ]; then
             npm publish --provenance --access public --tag dev
           else
