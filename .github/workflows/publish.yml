@@ -39,6 +39,7 @@ jobs:
         run: yarn build
       - name: Publish
         run: |
+          npm config delete //registry.npmjs.org/:_authToken || true
           if [ "${{ github.ref_name }}" = "develop" ]; then
             npm publish --provenance --access public --tag dev --verbose
           else
