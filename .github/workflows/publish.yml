@@ -40,7 +40,7 @@ jobs:
       - name: Publish
         run: |
           if [ "${{ github.ref_name }}" = "develop" ]; then
-            npm publish --provenance --access public --tag dev
+            npm publish --provenance --access public --tag dev --verbose
           else
-            npm publish --provenance --access public
+            npm publish --provenance --access public --verbose
           fi
