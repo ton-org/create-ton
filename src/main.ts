@@ -46,12 +46,15 @@ export async function main() {
         // and creation of the first contract via Blueprint
     });
 
+    const defaultProjectName = path.basename(path.resolve(''));
+
     const desiredProjectName: string =
         localArgs._[0] ||
         (
             await inquirer.prompt({
                 name: 'name',
                 message: 'Project name',
+                default: defaultProjectName,
             })
         ).name.trim();
 
@@ -59,7 +62,9 @@ export async function main() {
 
     const name = path.basename(projectPath);
 
-    if (name.length === 0) throw new Error('Cannot initialize a project with an empty name');
+    if (desiredProjectName.length === 0 || name.length === 0) {
+        throw new Error('Cannot initialize a project with an empty name');
+    }
 
     const noCi = localArgs['--no-ci'] ?? false;
 
