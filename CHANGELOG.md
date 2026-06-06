@@ -11,6 +11,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Added .env to .gitignore
 
+## [0.33.0] - 2026-03-02
+
+### Changed
+
+- Updated template dependencies
+
 ## [0.31.0] - 2025-08-21
 
 ### Changed
