@@ -4,6 +4,7 @@ jest.mock('inquirer', () => ({
     prompt: jest.fn(),
 }));
 
+import path from 'path';
 import * as child_process from 'child_process';
 
 import * as fsExtra from 'fs-extra';
@@ -39,6 +40,10 @@ describe('main', () => {
         mockedExec.execSync.mockImplementation(() => Buffer.from(''));
     });
 
+    afterEach(() => {
+        jest.restoreAllMocks();
+    });
+
     it('should create a project with --no-ci and fill templates', async () => {
         process.argv = [
             'node',
@@ -58,6 +63,21 @@ describe('main', () => {
         expect(mockedFs.writeFile).toHaveBeenCalledWith(
             expect.stringContaining('package.json'),
             expect.stringContaining('TestProject'),
+        );
+    });
+
+    it('should sanitize the default project name', async () => {
+        process.argv = ['node', 'cli.js', '--no-ci'];
+        jest.spyOn(path, 'basename').mockReturnValueOnce('My Project!@#_ok-1');
+        mockedPrompt.mockResolvedValueOnce({ name: 'TestProject' });
+
+        await main();
+
+        expect(mockedPrompt).toHaveBeenCalledWith(
+            expect.objectContaining({
+                name: 'name',
+                default: 'My_Project__ok-1',
+            }),
         );
     });
 });

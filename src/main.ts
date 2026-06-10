@@ -9,6 +9,10 @@ import chalk from 'chalk';
 const FILES_WITH_NAME_TEMPLATE = ['package.json', 'README.md'];
 const NAME_TEMPLATE = '{{name}}';
 
+function sanitizeDefaultProjectName(name: string) {
+    return name.replace(/[^a-zA-Z0-9_-]+/g, '_');
+}
+
 const VARIANT_CHOICES = [
     {
         name: 'An empty contract (Tolk)',
@@ -46,7 +50,7 @@ export async function main() {
         // and creation of the first contract via Blueprint
     });
 
-    const defaultProjectName = path.basename(path.resolve(''));
+    const defaultProjectName = sanitizeDefaultProjectName(path.basename(path.resolve('')));
 
     const desiredProjectName: string =
         localArgs._[0] ||
