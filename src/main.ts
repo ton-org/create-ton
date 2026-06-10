@@ -6,11 +6,19 @@ import inquirer from 'inquirer';
 import arg from 'arg';
 import chalk from 'chalk';
 
+import { snakeToPascal } from './utils';
+
 const FILES_WITH_NAME_TEMPLATE = ['package.json', 'README.md'];
 const NAME_TEMPLATE = '{{name}}';
 
 function sanitizeDefaultProjectName(name: string) {
     return name.replace(/[^a-zA-Z0-9_-]+/g, '_');
+}
+
+function sanitizeContractName(name: string) {
+    const contractName = snakeToPascal(name);
+    if (contractName.length === 0 || /^[A-Z]/.test(contractName)) return contractName;
+    return `Contract${contractName}`;
 }
 
 const VARIANT_CHOICES = [
@@ -72,14 +80,18 @@ export async function main() {
 
     const noCi = localArgs['--no-ci'] ?? false;
 
-    const contractName: string =
+    const defaultContractName = sanitizeContractName(name);
+    const rawContractName: string = (
         (noCi ? 'NonExistent' : localArgs['--contractName']) ||
         (
             await inquirer.prompt({
                 name: 'contractName',
                 message: 'First created contract name (PascalCase)',
+                default: defaultContractName,
             })
-        ).contractName.trim();
+        ).contractName
+    ).trim();
+    const contractName = sanitizeContractName(rawContractName);
 
     if (!noCi) {
         if (contractName.length === 0) throw new Error(`Cannot create a contract with an empty name`);

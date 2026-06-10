@@ -80,4 +80,31 @@ describe('main', () => {
             }),
         );
     });
+
+    it('should sanitize folder names with @ and other symbols in the default project name', async () => {
+        process.argv = ['node', 'cli.js', '--no-ci'];
+        jest.spyOn(path, 'basename').mockReturnValueOnce('kek@lol-123_foo.bar');
+        mockedPrompt.mockResolvedValueOnce({ name: 'TestProject' });
+
+        await main();
+
+        expect(mockedPrompt).toHaveBeenCalledWith(
+            expect.objectContaining({
+                name: 'name',
+                default: 'kek_lol-123_foo_bar',
+            }),
+        );
+    });
+
+    it('should sanitize the contract name before validation', async () => {
+        process.argv = ['node', 'cli.js', 'TestProject', '--type', 'func-empty'];
+        mockedPrompt.mockResolvedValueOnce({ contractName: 'Kek_lol' });
+
+        await main();
+
+        expect(mockedExec.execSync).toHaveBeenCalledWith(
+            expect.stringContaining('blueprint create KekLol --type func-empty'),
+            expect.any(Object),
+        );
+    });
 });
