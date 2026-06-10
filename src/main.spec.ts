@@ -80,4 +80,16 @@ describe('main', () => {
             }),
         );
     });
+
+    it('should sanitize the contract name before validation', async () => {
+        process.argv = ['node', 'cli.js', 'TestProject', '--type', 'func-empty'];
+        mockedPrompt.mockResolvedValueOnce({ contractName: 'Kek_lol' });
+
+        await main();
+
+        expect(mockedExec.execSync).toHaveBeenCalledWith(
+            expect.stringContaining('blueprint create KekLol --type func-empty'),
+            expect.any(Object),
+        );
+    });
 });
