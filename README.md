@@ -1,5 +1,8 @@
 # npm create ton
 
+> [!WARNING]
+> Deprecated. Use [https://ton-blockchain.github.io/acton/](Acton) instead.
+
 This is an entry point script for the Blueprint development tool
 
 ## Usage
@@ -17,4 +20,4 @@ npm create ton@latest -- project-dir --type first-contract-type --contractName F
 ```
 where `first-contract-type` can currently be one of `tolk-empty`, `tolk-counter`, `func-empty`, `func-counter`, `tact-empty`, `tact-counter`
 
-For more details please go to https://github.com/ton-org/blueprint
+For more details please go to https://ton-blockchain.github.io/acton/
