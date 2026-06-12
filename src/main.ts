@@ -49,6 +49,7 @@ const VARIANT_CHOICES = [
 ];
 
 export async function main() {
+    console.log(`Deprecated. Use https://ton-blockchain.github.io/acton/ instead.`);
     console.log();
 
     const localArgs = arg({
