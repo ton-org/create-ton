@@ -1,7 +1,7 @@
 # npm create ton
 
 > [!CAUTION]
-> Deprecated. Use [https://ton-blockchain.github.io/acton/](Acton) instead.
+> Deprecated. Use [Acton](https://ton-blockchain.github.io/acton/) instead.
 
 This is an entry point script for the Blueprint development tool
 
