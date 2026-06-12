@@ -49,7 +49,7 @@ const VARIANT_CHOICES = [
 ];
 
 export async function main() {
-    console.log(`Deprecated. Use https://ton-blockchain.github.io/acton/ instead.`);
+    printDeprecationNotice();
     console.log();
 
     const localArgs = arg({
@@ -263,6 +263,10 @@ function printResultingUsageDetails(desiredProjectName: string, noCi: boolean) {
     console.log(chalk.greenBright(` >  `) + chalk.cyanBright(`npx blueprint create AnotherContract`));
     console.log(` create a new contract and all related necessary files`);
     console.log(``);
-    console.log(`Deprecated. Use https://ton-blockchain.github.io/acton/ instead.`);
+    printDeprecationNotice();
     console.log(``);
+}
+
+function printDeprecationNotice() {
+    console.log(`${chalk.red('!')} Deprecated. Use https://ton-blockchain.github.io/acton/ instead.`);
 }
