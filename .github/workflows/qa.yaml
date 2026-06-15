@@ -3,24 +3,16 @@ name: QA
 on:
   push:
     paths-ignore:
-      - '.github/workflows/acceptance.yaml'
-      - '.github/workflows/reward.yml'
-      - '.github/workflows/reward-merged-prs.yml'
       - '.github/ISSUE_TEMPLATE/*'
       - '*.md'
     branches:
-      - main
-      - develop
+      - master
   pull_request:
     paths-ignore:
-      - '.github/workflows/acceptance.yaml'
-      - '.github/workflows/reward.yml'
-      - '.github/workflows/reward-merged-prs.yml'
       - '.github/ISSUE_TEMPLATE/*'
       - '*.md'
     branches:
-      - main
-      - develop
+      - master
 
 jobs:
   lint:
@@ -44,6 +36,7 @@ jobs:
         with:
           name: dist
           path: dist/create-ton.tgz
+
   acceptance:
     needs: build
     runs-on: ${{ matrix.platform.on }}
