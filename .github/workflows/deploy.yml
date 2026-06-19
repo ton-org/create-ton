@@ -16,7 +16,7 @@ jobs:
     name: Publish
     runs-on: ubuntu-latest
     environment: deploy
-    if: github.repository == 'ton-org/sandbox'
+    if: github.repository == 'ton-org/create-ton'
 
     permissions:
       contents: read
