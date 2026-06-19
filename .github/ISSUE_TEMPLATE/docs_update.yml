@@ -1,6 +1,6 @@
 name: Docs Update
 description: Suggest an update or improvement to the documentation
-labels: ["documentation"]
+labels: [ "documentation" ]
 body:
   - type: textarea
     id: suggestion
