@@ -18,6 +18,6 @@ If you want to input data non-interactively (for example, in scripts), do:
 ```bash
 npm create ton@latest -- project-dir --type first-contract-type --contractName FirstContractName
 ```
-where `first-contract-type` can currently be one of `tolk-empty`, `tolk-counter`, `func-empty`, `func-counter`, `tact-empty`, `tact-counter`
+where `first-contract-type` can currently be one of `tolk-empty`, `tolk-counter`, `func-empty` (deprecated), `func-counter` (deprecated), `tact-empty` (deprecated), `tact-counter` (deprecated)
 
 For more details please go to https://ton-blockchain.github.io/acton/
