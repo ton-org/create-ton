@@ -10,9 +10,6 @@
         "types": ["jest", "node"],
         "skipLibCheck": true
     },
-    "exclude": [
-        "**/*.fixture.ts",
-        "**/*.spec.ts"
-    ],
+    "exclude": ["**/*.fixture.ts", "**/*.spec.ts"],
     "include": ["src/**/*"]
 }

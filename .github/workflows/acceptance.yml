@@ -1,0 +1,103 @@
+name: Run acceptance tests
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions: {}
+
+jobs:
+  build:
+    name: Test
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+
+    steps:
+      - name: Fetch Sources
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+        with:
+          persist-credentials: false
+
+      - name: Enable Corepack
+        run: corepack enable
+
+      - name: Setup Node.js
+        uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6.4.0
+        with:
+          node-version: 22.x
+          cache: "yarn"
+
+      - name: Install dependencies
+        run: yarn install --immutable --check-cache --check-resolutions
+
+      - name: Build
+        run: yarn run build
+
+      - name: Create pack
+        run: yarn pack --out dist/create-ton.tgz
+
+      - name: Upload dist
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: dist
+          path: dist/create-ton.tgz
+          retention-days: 1
+          if-no-files-found: error
+
+  acceptance-tests:
+    needs: [ build]
+    runs-on: ${{ matrix.platform.on }}
+    name: ${{ matrix.type }} on ${{ matrix.platform.name }} & node ${{ matrix.node }}
+    strategy:
+      fail-fast: false
+      matrix:
+        platform:
+          - { on: ubuntu-24.04, name: nix }
+          - { on: windows-2025, name: win }
+          - { on: macos-15, name: mac }
+        node:
+          - 20
+          - 24
+        type:
+          - tact-counter
+          - func-counter
+          - tolk-counter
+
+    permissions:
+      contents: read
+
+    steps:
+      - name: Download dist
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
+        with:
+          name: dist
+          path: ./dist
+
+      - name: Enable Corepack
+        run: corepack enable
+
+      - name: Setup Node.js
+        uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6.4.0
+        with:
+          node-version: ${{ matrix.node }}
+          package-manager-cache: false
+
+      - name: Create project ${{ matrix.type }}
+        # language=Bash
+        run: |
+          npm install --global ./dist/create-ton.tgz
+          npx create-ton ${{ matrix.type }} --type ${{ matrix.type }} --contractName Counter
+          cd ${{ matrix.type }}
+          npm run build -- --all
+          npm test
