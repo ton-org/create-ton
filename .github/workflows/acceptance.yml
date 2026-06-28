@@ -68,7 +68,6 @@ jobs:
           - { on: macos-15, name: mac }
         node:
           - 20
-          - 22
           - 24
         type:
           - tact-counter
