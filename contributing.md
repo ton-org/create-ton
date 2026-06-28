@@ -17,7 +17,7 @@ git checkout -b name-of-your-feature origin/develop
 Write the code for your change, test it locally, then commit
 
 > Git history: work log vs recipe https://www.bitsnbites.eu/git-history-work-log-vs-recipe/
-Use [Conventional Commits](https://www.conventionalcommits.org/)
+> Use [Conventional Commits](https://www.conventionalcommits.org/)
 
 ```shell
 git commit --message "feat: paypal payment for different users"
@@ -50,6 +50,7 @@ Then create a pull request from the [pull requests page](https://github.com/ton-
 ```shell
 https://github.com/ton-org/create-ton/pull/new/name-of-your-feature
 ```
+
 (note the name of your branch in the URL)
 
 ### Step 5 — update your branch from main
@@ -57,7 +58,7 @@ https://github.com/ton-org/create-ton/pull/new/name-of-your-feature
 This step may be necessary in case the `main`/`develop` branch has changed since you created your branch
 
 > [!NOTE]
-> A tidy, linear Git history  https://www.bitsnbites.eu/a-tidy-linear-git-history/
+> A tidy, linear Git history https://www.bitsnbites.eu/a-tidy-linear-git-history/
 
 Get the latest upstream changes and update the working branch:
 
@@ -65,6 +66,7 @@ Get the latest upstream changes and update the working branch:
 git fetch --prune origin
 git rebase --autostash --ignore-date origin/main
 ```
+
 > [!WARNING]
 > Please note that you get the current state of the `main` branch from the **origin** remote for pushing to your own branch
 

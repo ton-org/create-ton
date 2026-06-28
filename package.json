@@ -16,6 +16,8 @@
     "scripts": {
         "lint": "eslint . --max-warnings 0",
         "lint:fix": "eslint . --max-warnings 0 --fix",
+        "fmt": "prettier --write -l --cache .",
+        "fmt:check": "prettier --check --cache .",
         "test": "jest src",
         "build": "rm -rf dist && tsc && cp -r template dist/template"
     },
