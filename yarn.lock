@@ -1045,7 +1045,7 @@ __metadata:
     eslint-plugin-prettier: "npm:^5.4.0"
     globals: "npm:^16.2.0"
     prettier: "npm:^3.5.3"
-  checksum: 10/5324d2778444859e8e52050996c99009a690369c807cf4715a56f5e4815ed6ba5ad5b191fd7377fe3575ebe92a6cbdb67c4222004e1ea485c393605c1e68cc02
+  checksum: 10c0/cf85054fca1006779b3e69bd5e90b10747c33f5fa0d0e306feb59678629b12a37e3186058093829455f68e2a49e52a29769b831212be229d99f1690d4e9a5973
   languageName: node
   linkType: hard
 
