@@ -1,4 +1,4 @@
-name: Run tests
+name: Run acceptance tests
 
 on:
   push:
@@ -55,7 +55,7 @@ jobs:
           retention-days: 1
           if-no-files-found: error
 
-  acceptance:
+  acceptance-tests:
     needs: [ build]
     runs-on: ${{ matrix.platform.on }}
     name: ${{ matrix.type }} on ${{ matrix.platform.name }} & node ${{ matrix.node }}
