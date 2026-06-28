@@ -5,6 +5,6 @@ body:
     id: description
     attributes:
       label: Description
-      description: Provide a detailed description of the issue or question
+      description: Provide a detailed description of the issue or question.
     validations:
       required: true

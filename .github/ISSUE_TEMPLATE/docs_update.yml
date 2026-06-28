@@ -1,12 +1,12 @@
 name: Docs Update
 description: Suggest an update or improvement to the documentation
-labels: ["documentation"]
+labels: [ "documentation" ]
 body:
   - type: textarea
     id: suggestion
     attributes:
       label: Suggested Update
-      description: Describe the proposed documentation update or fix
+      description: Describe the proposed documentation update or fix.
     validations:
       required: true
 
@@ -14,6 +14,6 @@ body:
     id: context
     attributes:
       label: Additional Context
-      description: Add any other relevant information or context
+      description: Add any other relevant information or context.
     validations:
       required: false

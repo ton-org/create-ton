@@ -1,12 +1,12 @@
 name: Bug Report
 description: Report a reproducible bug or unexpected behavior
-labels: ["bug"]
+labels: [ "bug" ]
 body:
   - type: textarea
     id: description
     attributes:
       label: Description
-      description: Describe the bug, including expected and actual behavior
+      description: Describe the bug, including expected and actual behavior.
     validations:
       required: true
 
@@ -14,7 +14,7 @@ body:
     id: steps
     attributes:
       label: Steps to Reproduce
-      description: Provide a list of steps to reproduce the bug
+      description: Provide a list of steps to reproduce the bug.
       placeholder: |
         1. Run `blueprint ...`
         2. Enter `...`
@@ -27,7 +27,7 @@ body:
     attributes:
       label: Environment
       description: Provide relevant environment details (OS, runtime, etc).
-      placeholder: "`node -v && uname -a` e.g., Ubuntu 25.04, Node 22.16.0"
+      placeholder: "e.g., Ubuntu 25.04, Node 22.16.0"
     validations:
       required: false
 
@@ -35,6 +35,6 @@ body:
     id: logs
     attributes:
       label: Logs or Screenshots
-      description: Include relevant logs, stack traces, or screenshots
+      description: Include relevant logs, stack traces, or screenshots.
     validations:
       required: false
