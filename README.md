@@ -2,6 +2,8 @@
 
 > [!CAUTION]
 > Deprecated. Use [Acton](https://ton-blockchain.github.io/acton/) instead.
+> 
+> Pull requests are not accepted at the moment; please bring any problems or tasks to [issues](https://github.com/ton-org/create-ton/issues).
 
 This is an entry point script for the Blueprint development tool
 
